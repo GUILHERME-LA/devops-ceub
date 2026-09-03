@@ -1,5 +1,5 @@
 // SIMULAÇÃO DE VAZAMENTO DE SEGREDO
-const api_key = "AKIAIOSFODNN7EXAMPLE1234567890abcdefa";
+apikey = "AKIAIOSFODNN7EXAMPLE1234567890abcdefa";
 function somar(a, b) {
   return a + b;
 }
