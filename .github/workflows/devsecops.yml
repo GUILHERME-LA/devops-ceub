@@ -13,21 +13,21 @@ jobs:
   ci_quality:
     name: 1. CI - Qualidade e Testes
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Instalar dependências
         run: npm ci
 
       #- name: Executar Linter (Análise Estática de Estilo)
-       # run: npm run lint
+      #  run: npm run lint
 
       - name: Executar Testes Automatizados (Jest)
         run: npm test
@@ -39,17 +39,17 @@ jobs:
     name: 2. DevSecOps - Análise de Segurança
     needs: ci_quality  # Só executa se a etapa de CI passar
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Instalar dependências
         run: npm ci
@@ -71,15 +71,15 @@ jobs:
     name: 3. CD - Build e Implantação
     needs: devsecops_security  # Só faz o deploy se passar nas verificações de segurança!
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Instalar dependências
         run: npm ci
